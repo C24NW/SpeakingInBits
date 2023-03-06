@@ -1,5 +1,6 @@
 ﻿using CPW219_CRUD_Troubleshooting.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CPW219_CRUD_Troubleshooting.Controllers
 {
@@ -12,11 +13,18 @@ namespace CPW219_CRUD_Troubleshooting.Controllers
             context = dbContext;
         }
 
+
+
+
         public IActionResult Index()
         {
             List<Student> products = StudentDb.GetStudents(context);
             return View();
         }
+
+
+
+
 
         public IActionResult Create()
         {
@@ -29,6 +37,7 @@ namespace CPW219_CRUD_Troubleshooting.Controllers
             if (ModelState.IsValid)
             {
                 StudentDb.Add(p, context);
+             
                 ViewData["Message"] = $"{p.Name} was added!";
                 return View();
             }
@@ -37,10 +46,16 @@ namespace CPW219_CRUD_Troubleshooting.Controllers
             return View(p);
         }
 
+
+
+
+
+
+
         public IActionResult Edit(int id)
         {
             //get the product by id
-            Student p = StudentDb.GetStudent(context, id);
+            //Student p = StudentDb.GetStudent(context, id);
 
             //show it on web page
             return View();
@@ -59,11 +74,22 @@ namespace CPW219_CRUD_Troubleshooting.Controllers
             return View(p);
         }
 
+
+
+
+
         public IActionResult Delete(int id)
         {
-            Student p = StudentDb.GetStudent(context, id);
-            return View(p);
+            //Student p = StudentDb.GetStudent(context, id);
+            //return View(p);
+            return View();
+            
+;            
+            
         }
+
+
+
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirm(int id)
